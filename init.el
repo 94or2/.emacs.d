@@ -4,7 +4,7 @@
 ;; common lisp
 (require 'cl)
 
-;; 文字コード
+;; 文字コード
 (set-language-environment "Japanese")
 (let ((ws window-system))
   (cond ((eq ws 'w32)
@@ -21,8 +21,8 @@
 ;;カラーテーマ
 (load-theme 'deeper-blue t)
 
-;; Windowsで英数と日本語にMeiryoを指定
-;; Macで英数と日本語にRictyを指定
+;; Windowsで英数と日本語にMeiryoを指定
+;; Macで英数と日本語にRictyを指定
 (let ((ws window-system))
   (cond ((eq ws 'w32)
          (set-face-attribute 'default nil
@@ -35,22 +35,22 @@
                              :height 140)
          (set-fontset-font nil 'japanese-jisx0208 (font-spec :family "Ricty")))))  ;; 日本語
 
-;; スタートアップ非表示
+;; スタートアップ非表示
 (setq inhibit-startup-screen t)
 
-;; scratchの初期メッセージ消去
+;; scratchの初期メッセージ消去
 (setq initial-scratch-message "")
 
-;; ツールバー非表示
+;; ツールバー非表示
 (tool-bar-mode -1)
 
-;; メニューバーを非表示
+;; メニューバーを非表示
 (menu-bar-mode -1)
 
-;; スクロールバー非表示
+;; スクロールバー非表示
 (set-scroll-bar-mode nil)
 
-;; タイトルバーにファイルのフルパス表示
+;; タイトルバーにファイルのフルパス表示
 (setq frame-title-format
       (format "%%f - Emacs@%s" (system-name)))
 
@@ -80,11 +80,13 @@
 (set-face-background 'trailing-whitespace "#b14770")
 
 
-;; タブをスペースで扱う
+;; タブをスペースで扱う
 (setq-default indent-tabs-mode nil)
 
-;; タブ幅
-(custom-set-variables '(tab-width 4))
+;; タブ幅
+;(custom-set-variables '(tab-width 4))
+(setq default-tab-width 2)
+
 
 ;; yes or noをy or n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -98,10 +100,10 @@
 ;; 最近開いたファイルの保存数を増やす
 (setq recentf-max-saved-items 3000)
 
-;; バックアップを残さない
+;; バックアップを残さない
 (setq make-backup-files nil)
 
-;; 1行ずつスクロール
+;; 1行ずつスクロール
 (setq scroll-conservatively 35
       scroll-margin 0
       scroll-step 1)
@@ -111,9 +113,16 @@
 (set-frame-parameter (selected-frame) 'alpha '(0.85))
 
 
-;; C-Ret で矩形選択
-;; 詳しいキーバインド操作：http://dev.ariel-networks.com/articles/emacs/part5/
+;; C-Ret で矩形選択
+;; 詳しいキーバインド操作：http://dev.ariel-networks.com/articles/emacs/part5/
 (cua-mode t)
 (setq cua-enable-cua-keys nil)
 
 
+;;python indent
+(add-hook 'python-mode-hook
+    '(lambda ()
+        (setq python-indent 4)
+        (setq indent-tabs-mod nil)
+        (define-key (current-local-map) "\C-h" 'python-backspace)
+    ))
