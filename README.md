@@ -8,3 +8,7 @@ http://d.hatena.ne.jp/sandai/20120304/p2
 
 カラーテーマの設定方法
 http://aoe-tk.hatenablog.com/entry/20130210/1360506829
+
+
+2016.10.26
+  pythonのインデント幅調整設定を追加
