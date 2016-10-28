@@ -122,7 +122,7 @@
 ;;python indent
 (add-hook 'python-mode-hook
     '(lambda ()
-        (setq python-indent 4)
+        (setq python-indent 2)
         (setq indent-tabs-mod nil)
         (define-key (current-local-map) "\C-h" 'python-backspace)
     ))
