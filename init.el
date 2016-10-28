@@ -1,3 +1,4 @@
+
 ;; ------------------------------------------------------------------------
 ;; @ general
 
@@ -54,7 +55,7 @@
 (setq frame-title-format
       (format "%%f - Emacs@%s" (system-name)))
 
- ;; 行番号表示
+;; 行番号表示
 (global-linum-mode t)
 (set-face-attribute 'linum nil
                     :foreground "#800"
@@ -84,7 +85,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; タブ幅
-;(custom-set-variables '(tab-width 4))
+                                        ;(custom-set-variables '(tab-width 4))
 (setq default-tab-width 2)
 
 
@@ -121,8 +122,42 @@
 
 ;;python indent
 (add-hook 'python-mode-hook
-    '(lambda ()
-        (setq python-indent 2)
-        (setq indent-tabs-mod nil)
-        (define-key (current-local-map) "\C-h" 'python-backspace)
-    ))
+          '(lambda ()
+             (setq python-indent 2)
+             (setq indent-tabs-mod nil)
+             (define-key (current-local-map) "\C-h" 'python-backspace)
+             ))
+
+
+;;package の取得先
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+(custom-set-variables
+
+
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (auto-complete auto-complete-c-headers))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;;
+;; Auto Complete
+;;
+(require 'auto-complete-config)
+(ac-config-default)
+(add-to-list 'ac-modes 'text-mode)         ;; text-modeでも自動的に有効にする
+(add-to-list 'ac-modes 'fundamental-mode)  ;; fundamental-mode
+(add-to-list 'ac-modes 'org-mode)
+(add-to-list 'ac-modes 'yatex-mode)
+(ac-set-trigger-key "TAB")
+(setq ac-use-menu-map t)       ;; 補完メニュー表示時にC-n/C-pで補完候補選択
+(setq ac-use-fuzzy t)          ;; 曖昧マッチ
