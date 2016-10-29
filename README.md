@@ -14,8 +14,7 @@ brew で入れたcocoa emacsの設定ファイル等
 - pythonのインデント幅調整設定を追加
 
 2016.10.28
-- auto-completeに関する設定を追加
-init.elを書き換えるだけでは機能しない。
+- auto-completeに関する設定を追加。init.elを書き換えるだけでは機能しない。
 emacsのpackage-install(`M-x package-list-packages`)をinstallして使用する。
 
 2016.10.29
