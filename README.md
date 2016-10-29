@@ -17,3 +17,6 @@ http://aoe-tk.hatenablog.com/entry/20130210/1360506829
   auto-completeに関する設定を追加
   init.elを書き換えるだけでは機能しない。
   emacsのpackage-install(`M-x package-list-packages`)をinstallして使用する。
+
+2016.10.29
+  yatexに関する設定を追加
