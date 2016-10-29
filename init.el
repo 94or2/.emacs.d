@@ -135,13 +135,11 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 (custom-set-variables
-
-
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (auto-complete auto-complete-c-headers))))
+ '(package-selected-packages (quote (yatex auto-complete auto-complete-c-headers))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -161,3 +159,56 @@
 (ac-set-trigger-key "TAB")
 (setq ac-use-menu-map t)       ;; 補完メニュー表示時にC-n/C-pで補完候補選択
 (setq ac-use-fuzzy t)          ;; 曖昧マッチ
+
+
+;; ---------------------------------------------------------
+;; YaTeX の設定
+;; ---------------------------------------------------------
+     
+;; Add library path
+(add-to-list 'load-path "~/.emacs.d/site-lisp/yatex1.78.4")
+;; YaTeX mode
+(setq auto-mode-alist
+    (cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
+(autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
+(setq tex-command "platex")
+(setq dviprint-command-format "dvipdfmx %s")
+;; use Preview.app
+(setq dvi2-command "open -a Preview")
+(defvar YaTeX-dvi2-command-ext-alist    
+  '(("xdvi" . ".dvi")                   
+      ("ghostview\\|gv" . ".ps")
+      ("acroread\\|pdf\\|Preview\\|open" . ".pdf")))
+
+;;
+;; Skim との連携
+;;
+;; http://oku.edu.mie-u.ac.jp/~okumura/texwiki/?Emacs#de8b4fcd
+;; inverse search
+(require 'server)
+(unless (server-running-p) (server-start))
+
+;; forward search
+;; http://oku.edu.mie-u.ac.jp/~okumura/texwiki/?YaTeX#f978a43b
+(defun skim-forward-search ()
+  (interactive)
+  (progn
+    (process-kill-without-query
+     (start-process  
+      "displayline"
+      nil
+      "/Applications/Skim.app/Contents/SharedSupport/displayline"
+      (number-to-string (save-restriction
+                          (widen)
+                          (count-lines (point-min) (point))))
+      (expand-file-name
+       (concat (file-name-sans-extension (or YaTeX-parent-file
+                                             (save-excursion
+                                               (YaTeX-visit-main t)
+                                               buffer-file-name)))
+               ".pdf"))
+      buffer-file-name))))
+
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (define-key YaTeX-mode-map (kbd "C-c s") 'skim-forward-search)))
