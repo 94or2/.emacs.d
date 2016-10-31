@@ -20,7 +20,7 @@
          (setq locale-coding-system 'utf-8-hfs))))
 
 ;;カラーテーマ
-(load-theme 'deeper-blue t)
+(load-theme 'wombat t)
 
 ;; Windowsで英数と日本語にMeiryoを指定
 ;; Macで英数と日本語にRictyを指定
