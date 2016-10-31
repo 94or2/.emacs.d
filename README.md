@@ -23,4 +23,4 @@ emacsのpackage-install(`M-x package-list-packages`)をinstallして使用する
 2016.10.31
 - editor-configを追加
 - lisp/を追加
-- カラーテーマを"wonbat"ヘ変更
+- カラーテーマを"wombat"ヘ変更
