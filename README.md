@@ -19,3 +19,7 @@ emacsのpackage-install(`M-x package-list-packages`)をinstallして使用する
 
 2016.10.29
 - yatexに関する設定を追加
+
+2016.10.31
+- editor-configを追加
+- lisp/を追加
