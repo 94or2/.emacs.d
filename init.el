@@ -119,6 +119,8 @@
 (cua-mode t)
 (setq cua-enable-cua-keys nil)
 
+;; Macのoptionをメタキーにする
+(setq mac-option-modifier 'meta)
 
 ;;python indent
 (add-hook 'python-mode-hook
